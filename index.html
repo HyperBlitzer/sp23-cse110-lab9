@@ -102,6 +102,72 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    errorBtns[0].addEventListener('click', function () {
+      console.log('Console Log Demo');
+    })
+    errorBtns[1].addEventListener('click', function () {
+      console.error('Console Error Demo');
+    })
+    errorBtns[2].addEventListener('click', function () {
+      console.count();
+    })
+    errorBtns[3].addEventListener('click', function () {
+      console.warn('Console Warn Demo');
+    })
+    errorBtns[4].addEventListener('click', function () {
+      const  x = 3;
+      const  y = 5;
+      console.assert(3 > 5, {x,y});
+    })
+    errorBtns[5].addEventListener('click', function () {
+      console.clear();
+    })
+    errorBtns[6].addEventListener('click', function () {
+      console.dir(form);
+    })
+    errorBtns[7].addEventListener('click', function () {
+      console.dirxml(form);
+    })
+    errorBtns[8].addEventListener('click', function () {
+      console.group('demo');
+    })
+    errorBtns[9].addEventListener('click', function () {
+      console.groupEnd('demo');
+    })
+    errorBtns[10].addEventListener('click', function () {
+      const tabularData = [
+        {
+          color: 'black',
+          device: 'iPhone 15'
+        },
+        {
+          color: 'purple',
+          device: 'Nintendo Switch'
+        }
+      ];
+      console.table(tabularData);
+    })
+    errorBtns[11].addEventListener('click', function () {
+      console.time('Time Demo');
+    })
+    errorBtns[12].addEventListener('click', function () {
+      console.timeEnd('Time Demo');
+    })
+    errorBtns[13].addEventListener('click', function () {
+      let callThree = function () {
+        console.trace();
+      }
+      let callTwo = function () {
+        callThree();
+      }
+      let callOne = function () {
+        callTwo();
+      }
+      callOne();
+    })
+    errorBtns[14].addEventListener('click', function () {
+      undefinedFunction();
+    })
   </script>
 </body>
 
