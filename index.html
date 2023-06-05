@@ -86,16 +86,44 @@
       <button>Trigger a Global Error</button>
     </section>
   </main>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "1df2545d5eed49d59411f633b8e0af18"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
 
   <script>
+    TrackJS.track('Testing TrackJS!');
+    class InvalidInput extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'InvalidInput';
+      }
+    }
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
       let output = document.querySelector('output');
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      let operator = document.querySelector('#operator').value; 
+      const numbers = /^[0-9]+$/;
+      try {
+        if (!firstNum.match(numbers) || !secondNum.match(numbers)) {
+          throw new InvalidInput('input not a numerical value!');
+        }
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        if (error instanceof InvalidInput) {
+          console.error('invalid input type');
+          output.innerHTML = 'please try again';
+        }
+      } finally {
+        console.log('done checking calculator input');
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -166,7 +194,7 @@
       callOne();
     })
     errorBtns[14].addEventListener('click', function () {
-      undefinedFunction();
+      throw new Error('Global Error');
     })
   </script>
 </body>
